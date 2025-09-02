@@ -1,25 +1,23 @@
-var builder = WebApplication.CreateBuilder(args);
+using System;
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+class Program
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    static void Main(string[] args)
+    {
+        // Create an instance of Employee and assign values
+        Employee employee = new Employee
+        {
+            Id = 103,
+            FirstName = "Mohammed",
+            LastName = "Khan"
+        };
+
+        // Use polymorphism: assign the Employee object to an IQuittable interface reference
+        IQuittable quittableEmployee = employee;
+
+        // Call the Quit method using the interface reference
+        quittableEmployee.Quit();
+
+        // This demonstrates polymorphism: the method call is resolved at runtime
+    }
 }
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
